@@ -1,0 +1,11 @@
+C:\Users\Lenovo\Desktop\Computer Science\Publius\bin\Debug\netcoreapp2.2\Publius.deps.json
+C:\Users\Lenovo\Desktop\Computer Science\Publius\bin\Debug\netcoreapp2.2\Publius.runtimeconfig.json
+C:\Users\Lenovo\Desktop\Computer Science\Publius\bin\Debug\netcoreapp2.2\Publius.runtimeconfig.dev.json
+C:\Users\Lenovo\Desktop\Computer Science\Publius\bin\Debug\netcoreapp2.2\Publius.dll
+C:\Users\Lenovo\Desktop\Computer Science\Publius\bin\Debug\netcoreapp2.2\Publius.pdb
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.csprojAssemblyReference.cache
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.dll
+C:\Users\Lenovo\Desktop\Computer Science\Publius\obj\Debug\netcoreapp2.2\Publius.pdb
