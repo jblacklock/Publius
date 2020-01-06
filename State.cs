@@ -9,7 +9,7 @@ public class State
     //The first int of Votes represents the candidate's ID
     //The second int of Votes represnets the number of votes which that candidate has 
     private Dictionary<int, CandidateState> Votes = new Dictionary<int, CandidateState>();
-    
+
     private Dictionary<int, int> CandidateElectors = new Dictionary<int, int>();
     public int Electors { get; set; }
     public int TotalNumberOfVotes = 0;
@@ -32,26 +32,38 @@ public class State
 
     public void calculateCandidateElectors()
     {
-         Dictionary<int, int> leftovers = new Dictionary<int, int>();
+        Dictionary<int, int> leftovers = new Dictionary<int, int>();
 
         foreach (KeyValuePair<int, CandidateState> entry in Votes)
         {
             if (TotalNumberOfVotes == 0)
             {
-                throw new System.InvalidOperationException(this.Name+" does not have any votes!");
+                throw new System.InvalidOperationException(this.Name + " does not have any votes!");
             }
             else
             {
-                Console.WriteLine(entry.Value.numberOfVotes+"/"+TotalNumberOfVotes);
-                CandidateElectors.Add(entry.Value.ID, (entry.Value.numberOfVotes*this.Electors/TotalNumberOfVotes));
+                Console.WriteLine(entry.Value.numberOfVotes + "/" + TotalNumberOfVotes);
+                CandidateElectors.Add(entry.Value.ID, (entry.Value.numberOfVotes * this.Electors / TotalNumberOfVotes));
                 //This does not yet deal with leftover votes
             }
         }
     }
 
-    public void printElectoralDistrubution(){
-        foreach(KeyValuePair<int, int> entry in CandidateElectors){
-            Console.WriteLine("In "+ this.Name+", "+Votes[entry.Key].Name+" earned "+ entry.Value+" electoral college votes out of "+this.Electors);
+    public void printElectoralDistrubution()
+    {
+        foreach (KeyValuePair<int, int> entry in CandidateElectors)
+        {
+            Console.WriteLine("In " + this.Name + ", " + Votes[entry.Key].Name + " earned " + entry.Value + " electoral college votes out of " + this.Electors);
+        }
+    }
+
+    public void getElectoralDistrubution(List<Candidate> candidates)
+    {
+        foreach (Candidate c in candidates)
+        {
+            if(CandidateElectors.ContainsKey(c.ID)){
+            c.ElectoralCollegeVotes += CandidateElectors[c.ID];
+            }
         }
     }
 

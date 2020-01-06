@@ -41,6 +41,12 @@ namespace Publius
                 Console.WriteLine(s.getVoteInfo());
                 s.calculateCandidateElectors();
                 s.printElectoralDistrubution();
+                s.getElectoralDistrubution(candidates);
+            }
+
+            foreach (Candidate c in candidates)
+            {
+                Console.WriteLine(c.Name+" earned "+c.ElectoralCollegeVotes+" votes accross all 50 states");
             }
 
         }
