@@ -39,6 +39,8 @@ namespace Publius
             foreach (State s in states)
             {
                 Console.WriteLine(s.getVoteInfo());
+                s.calculateCandidateElectors();
+                s.printElectoralDistrubution();
             }
 
         }
