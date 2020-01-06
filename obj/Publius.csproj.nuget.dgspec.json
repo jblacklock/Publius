@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius.csproj": {}
+    "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius\\Publius.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius.csproj": {
+    "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius\\Publius.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius\\Publius.csproj",
         "projectName": "Publius",
-        "projectPath": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius.csproj",
+        "projectPath": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius\\Publius.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\obj\\",
+        "outputPath": "C:\\Users\\Lenovo\\Desktop\\Computer Science\\Publius\\Publius\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

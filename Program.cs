@@ -12,84 +12,35 @@ namespace Publius
         {
             JsonReader reader = new JsonReader();
 
-            List<State> states = reader.collectVotes();
+            List<State> states = reader.collectStates();
 
             List<Candidate> candidates = reader.collectCandidates();
 
-            // Dictionary<int, Candidate> candidateInfo = new Dictionary<int, Candidate>();
-            // Dictionary<int, List<List<int>>> voteTally = new Dictionary<int, List<List<int>>>();
-            // foreach (Candidate c in candidates)
-            // {
-            //     List<List<int>> listOfVotes = new List<List<int>>();
-            //     voteTally.Add(c.ID, listOfVotes);
-            //     candidateInfo.Add(c.ID, c);
-            // }
+            bool isEveryStateReady = false;
 
-            // foreach (List<int> vote in state.Votes)
-            // {
-            //     List<List<int>> temp = voteTally[vote[0]];
-            //     temp.Add(vote);
-            //     voteTally[vote[0]] = temp;
-            // }
+            while (isEveryStateReady == false)
+            {
+                foreach (State s in states)
+                {
+                    string curFile = s.Name + ".json";
+                    if (!File.Exists(curFile))
+                    {
+                        isEveryStateReady = false;
+                        Console.WriteLine(s.Name + " did not yet submit votes");
+                        break;
+                    }
+                    else { isEveryStateReady = true; }
+                }
+                Console.WriteLine(isEveryStateReady);
+            }
 
-            // int leastPopular = voteTally.Keys.First();
-            // int leastPopularCount = voteTally[leastPopular].Count;
-            // foreach (int id in voteTally.Keys)
-            // {
-            //     if (voteTally[id].Count < voteTally[leastPopular].Count)
-            //     {
-            //         leastPopular = id;
-            //         leastPopularCount = voteTally[id].Count;
-            //     }
+            reader.addVotesToStates(states, candidates);
 
-            // }
-            // Console.WriteLine("better luck next time " + candidateInfo[leastPopular].Name);
+            foreach (State s in states)
+            {
+                Console.WriteLine(s.getVoteInfo());
+            }
 
-            // while (candidateInfo.Count > 1)
-            // {
-            //     candidateInfo.Remove(leastPopular);
-            //     if (voteTally[leastPopular].Count > 0)
-            //     {
-
-            //         foreach (List<int> lostVotes in voteTally[leastPopular].ToList())
-            //         {
-            //             lostVotes.Remove(0);
-            //             while (true)
-            //             {
-            //                 if (lostVotes.Count == 0)
-            //                 {
-            //                     break;
-            //                 }
-            //                 if (voteTally.ContainsKey(lostVotes[0]))
-            //                 {
-            //                     List<List<int>> temp = voteTally[lostVotes[0]];
-            //                     temp.Add(lostVotes);
-            //                     break;
-            //                 }
-            //                 else
-            //                 {
-            //                     lostVotes.Remove(0);
-            //                 }
-            //             }
-
-            //         }
-            //     }
-            //     voteTally.Remove(leastPopular);
-
-            //     leastPopular = voteTally.Keys.First();
-            //     leastPopularCount = voteTally[leastPopular].Count;
-            //     foreach (int id in voteTally.Keys)
-            //     {
-            //         if (voteTally[id].Count < voteTally[leastPopular].Count)
-            //         {
-            //             leastPopular = id;
-            //             leastPopularCount = voteTally[id].Count;
-            //         }
-
-            //     }
-            //     Console.WriteLine("The least popular is " + candidateInfo[leastPopular].Name);
-            // }
-            // Console.WriteLine("All hail " + candidateInfo[candidateInfo.Keys.First()].Name);
         }
     }
 }
