@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class State
 {
@@ -32,19 +33,48 @@ public class State
 
     public void calculateCandidateElectors()
     {
-        Dictionary<int, int> leftovers = new Dictionary<int, int>();
-
-        foreach (KeyValuePair<int, CandidateState> entry in Votes)
+        if (TotalNumberOfVotes == 0)
         {
-            if (TotalNumberOfVotes == 0)
+            throw new System.InvalidOperationException(this.Name + " does not have any votes!");
+        }
+        if (this.Electors == 0)
+        {
+            throw new System.InvalidOperationException(this.Name + " does not have any electors!");
+        }
+        else
+        {
+            List<KeyValuePair<int, CandidateState>> leftoverVotes = new List<KeyValuePair<int, CandidateState>>();
+            int ElectoralVotesAwarded = 0;
+
+            foreach (KeyValuePair<int, CandidateState> entry in Votes)
             {
-                throw new System.InvalidOperationException(this.Name + " does not have any votes!");
+                int ElectoralVotesEarnedByCandidate = entry.Value.numberOfVotes * this.Electors / TotalNumberOfVotes;
+                CandidateElectors.Add(entry.Value.ID, ElectoralVotesEarnedByCandidate);
+                ElectoralVotesAwarded += ElectoralVotesEarnedByCandidate;
+
+
+                //TODO: the following code is not correctly calculating the leftovers
+                KeyValuePair<int, CandidateState> CandidateLeftovers = new KeyValuePair<int, CandidateState>(entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors, entry.Value);
+                Console.WriteLine(entry.Value.Name + " has " + entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors + " leftover votes in the state of " + this.Name + ": " + entry.Value.numberOfVotes + "%(" + TotalNumberOfVotes + "/" + this.Electors + ")= " + entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors);
+                leftoverVotes.Add(CandidateLeftovers);
             }
-            else
+
+            while (ElectoralVotesAwarded < this.Electors)
             {
-                Console.WriteLine(entry.Value.numberOfVotes + "/" + TotalNumberOfVotes);
-                CandidateElectors.Add(entry.Value.ID, (entry.Value.numberOfVotes * this.Electors / TotalNumberOfVotes));
-                //This does not yet deal with leftover votes
+                leftoverVotes = leftoverVotes.OrderByDescending(p => p.Key).ToList();
+                if (leftoverVotes[0].Key > leftoverVotes[1].Key && this.Electors - ElectoralVotesAwarded == 1)
+                {
+                    CandidateElectors[leftoverVotes[0].Value.ID] += 1;
+                    ElectoralVotesAwarded++;
+                    Console.WriteLine("The remaining electoral vote goes to " + leftoverVotes[0].Value.Name);
+                }
+                else
+                {
+                    Console.WriteLine("The state of " + this.Name + " has a tie for an electoral vote between " + leftoverVotes[0].Value.Name + " and " + leftoverVotes[1].Value.Name);
+                    Console.WriteLine("This tie must be broken by the people of the state of " + this.Name);
+                    Console.WriteLine(ElectoralVotesAwarded + " electoral votes out of " + this.Electors + " were awared to the various candidates.");
+                    break;
+                }
             }
         }
     }
@@ -61,8 +91,9 @@ public class State
     {
         foreach (Candidate c in candidates)
         {
-            if(CandidateElectors.ContainsKey(c.ID)){
-            c.ElectoralCollegeVotes += CandidateElectors[c.ID];
+            if (CandidateElectors.ContainsKey(c.ID))
+            {
+                c.ElectoralCollegeVotes += CandidateElectors[c.ID];
             }
         }
     }

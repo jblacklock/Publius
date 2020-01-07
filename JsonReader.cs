@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
+//JsonReader reads the various json docments involved with the election process
 public class JsonReader
 {
 
@@ -10,18 +11,15 @@ public class JsonReader
     {
         foreach (State s in states)
         {
-            string curFile = s.Name + ".json";
+            string curFile = "StateVotes/"+s.Name + ".json";
             if (File.Exists(curFile))
             {
                 using (StreamReader reader = new StreamReader(curFile))
                 {
                     string json = reader.ReadToEnd();
-                    Console.WriteLine(json);
                     List<CandidateState> stateCandidate = JsonConvert.DeserializeObject<List<CandidateState>>(json);
-                    Console.WriteLine("Got past deserialization process");
                     foreach (CandidateState cs in stateCandidate)
                     {
-                        Console.WriteLine(cs.Name);
                         s.addVotesForCandidates(cs);
                     }
                 }
@@ -35,20 +33,18 @@ public class JsonReader
 
     public List<State> collectStates()
     {
-        using (StreamReader reader = new StreamReader("States.json"))
+        using (StreamReader reader = new StreamReader("ElectionCircumstances/States.json"))
         {
             string json = reader.ReadToEnd();
-            Console.WriteLine(json);
             return JsonConvert.DeserializeObject<List<State>>(json);
         }
     }
 
     public List<Candidate> collectCandidates()
     {
-        using (StreamReader reader = new StreamReader("candidates.json"))
+        using (StreamReader reader = new StreamReader("ElectionCircumstances/Candidates.json"))
         {
             string json = reader.ReadToEnd();
-            Console.WriteLine(json);
             return JsonConvert.DeserializeObject<List<Candidate>>(json);
         }
     }
