@@ -45,6 +45,7 @@ public class State
         {
             List<KeyValuePair<int, CandidateState>> leftoverVotes = new List<KeyValuePair<int, CandidateState>>();
             int ElectoralVotesAwarded = 0;
+            double ElectoralCollegeVotePerCitizenVotes = TotalNumberOfVotes / this.Electors;
 
             foreach (KeyValuePair<int, CandidateState> entry in Votes)
             {
@@ -52,10 +53,9 @@ public class State
                 CandidateElectors.Add(entry.Value.ID, ElectoralVotesEarnedByCandidate);
                 ElectoralVotesAwarded += ElectoralVotesEarnedByCandidate;
 
-
-                //TODO: the following code is not correctly calculating the leftovers
-                KeyValuePair<int, CandidateState> CandidateLeftovers = new KeyValuePair<int, CandidateState>(entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors, entry.Value);
-                Console.WriteLine(entry.Value.Name + " has " + entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors + " leftover votes in the state of " + this.Name + ": " + entry.Value.numberOfVotes + "%(" + TotalNumberOfVotes + "/" + this.Electors + ")= " + entry.Value.numberOfVotes % TotalNumberOfVotes / this.Electors);
+                
+                KeyValuePair<int, CandidateState> CandidateLeftovers = new KeyValuePair<int, CandidateState>(Convert.ToInt32(entry.Value.numberOfVotes % ElectoralCollegeVotePerCitizenVotes), entry.Value);
+                Console.WriteLine(entry.Value.Name + " has " + entry.Value.numberOfVotes % ElectoralCollegeVotePerCitizenVotes + " leftover votes in the state of " + this.Name + ": " + entry.Value.numberOfVotes + "%(" + TotalNumberOfVotes + "/" + this.Electors + ")= " + entry.Value.numberOfVotes % ElectoralCollegeVotePerCitizenVotes);
                 leftoverVotes.Add(CandidateLeftovers);
             }
 
@@ -70,6 +70,7 @@ public class State
                 }
                 else
                 {
+                    //TODO: MEDIUM PRIORITY have code check to see how many candidates tied for this point
                     Console.WriteLine("The state of " + this.Name + " has a tie for an electoral vote between " + leftoverVotes[0].Value.Name + " and " + leftoverVotes[1].Value.Name);
                     Console.WriteLine("This tie must be broken by the people of the state of " + this.Name);
                     Console.WriteLine(ElectoralVotesAwarded + " electoral votes out of " + this.Electors + " were awared to the various candidates.");

@@ -12,10 +12,10 @@ namespace Publius
         {
             bool ThereIsAPresidentialCandidateWinner = false;
 
-            //TODO: The following should be determined via a json document
+            //TODO: LOW PRIORITY/ADVANCED FEATURE The following should be determined via a json document
             int TotalNumberOfElectoralCollegeVotes = 538;
 
-            //TODO: The following should be determined via a json document
+            //TODO: LOW PRIORITY/ADVANCED FEATURE The following should be determined via a json document
             int year = 2020;
 
             JsonReader reader = new JsonReader();
@@ -58,7 +58,7 @@ namespace Publius
             {
                 //Console.WriteLine(s.getVoteInfo());
                 s.calculateCandidateElectors();
-                //TODO: consider making the following two lines part of calculateCandidateElectors
+                //TODO: LOW PRIORITY/REFACTORING consider making the following two lines part of calculateCandidateElectors
                 s.printElectoralDistrubution();
                 s.getElectoralDistrubution(candidates);
             }
