@@ -8,3 +8,17 @@ bin/Debug/netcoreapp2.2/Publius.dll
 obj/Publius.csproj.nuget.g.targets
 
 obj/Publius.csproj.nuget.g.props
+
+obj/Debug/netcoreapp2.2/Publius.csproj.FileListAbsolute.txt
+
+bin/Debug/netcoreapp2.2/Publius.pdb
+
+bin/Debug/netcoreapp2.2/Publius.runtimeconfig.dev.json
+
+obj/Publius.csproj.nuget.dgspec.json
+
+obj/Publius.csproj.nuget.cache
+
+obj/
+
+bin/Debug/netcoreapp2.2/
