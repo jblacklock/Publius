@@ -1,2 +1,10 @@
 
 obj/Debug/netcoreapp2.2/Publius.assets.cache
+
+bin/Debug/netcoreapp2.2/Publius.deps.json
+
+bin/Debug/netcoreapp2.2/Publius.dll
+
+obj/Publius.csproj.nuget.g.targets
+
+obj/Publius.csproj.nuget.g.props
