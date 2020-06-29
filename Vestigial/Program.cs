@@ -8,7 +8,7 @@ namespace Publius
 {
     class Program
     {
-        static void Main(string[] args)
+        static void OldMain(string[] args)
         {
             bool ThereIsAPresidentialCandidateWinner = false;
 
@@ -52,16 +52,18 @@ namespace Publius
                 }
             }
 
-            reader.addVotesToStates(states, candidates);
 
-            foreach (State s in states)
-            {
-                //Console.WriteLine(s.getVoteInfo());
-                s.calculateCandidateElectors();
-                //TODO: LOW PRIORITY/REFACTORING consider making the following two lines part of calculateCandidateElectors
-                s.printElectoralDistrubution();
-                s.getElectoralDistrubution(candidates);
-            }
+            // The following line and the foreach loop was removed on 06-28-20 for the restructuring
+            // reader.addVotesToStates(states, candidates);
+
+            // foreach (State s in states)
+            // {
+            //     //Console.WriteLine(s.getVoteInfo());
+            //     s.calculateCandidateElectors();
+            //     //TODO: LOW PRIORITY/REFACTORING consider making the following two lines part of calculateCandidateElectors
+            //     s.printElectoralDistrubution();
+            //     s.getElectoralDistrubution(candidates);
+            // }
 
 
             candidates = candidates.OrderBy(p => p.ElectoralCollegeVotes).ToList();

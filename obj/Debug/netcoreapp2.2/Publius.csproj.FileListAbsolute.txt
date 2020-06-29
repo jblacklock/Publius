@@ -20,3 +20,13 @@ C:\Users\Lenovo\Desktop\Computer Science\Publius\Publius\obj\Debug\netcoreapp2.2
 C:\Users\Lenovo\Desktop\Computer Science\Publius\Publius\obj\Debug\netcoreapp2.2\Publius.AssemblyInfo.cs
 C:\Users\Lenovo\Desktop\Computer Science\Publius\Publius\obj\Debug\netcoreapp2.2\Publius.dll
 C:\Users\Lenovo\Desktop\Computer Science\Publius\Publius\obj\Debug\netcoreapp2.2\Publius.pdb
+C:\Users\jesse\Desktop\Software Development\Publius\bin\Debug\netcoreapp2.2\Publius.deps.json
+C:\Users\jesse\Desktop\Software Development\Publius\bin\Debug\netcoreapp2.2\Publius.runtimeconfig.json
+C:\Users\jesse\Desktop\Software Development\Publius\bin\Debug\netcoreapp2.2\Publius.runtimeconfig.dev.json
+C:\Users\jesse\Desktop\Software Development\Publius\bin\Debug\netcoreapp2.2\Publius.dll
+C:\Users\jesse\Desktop\Software Development\Publius\bin\Debug\netcoreapp2.2\Publius.pdb
+C:\Users\jesse\Desktop\Software Development\Publius\obj\Debug\netcoreapp2.2\Publius.csprojAssemblyReference.cache
+C:\Users\jesse\Desktop\Software Development\Publius\obj\Debug\netcoreapp2.2\Publius.AssemblyInfoInputs.cache
+C:\Users\jesse\Desktop\Software Development\Publius\obj\Debug\netcoreapp2.2\Publius.AssemblyInfo.cs
+C:\Users\jesse\Desktop\Software Development\Publius\obj\Debug\netcoreapp2.2\Publius.dll
+C:\Users\jesse\Desktop\Software Development\Publius\obj\Debug\netcoreapp2.2\Publius.pdb

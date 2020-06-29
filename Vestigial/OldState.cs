@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-public class State
+public class OldState
 {
     public string Name { get; set; }
     public string Abbreviation { get; set; }
