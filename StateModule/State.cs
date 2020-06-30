@@ -30,28 +30,42 @@ public class State
         GenerateVoteDocument(ElctoralCollegeVotes);
     }
 
-    public void removeCandidate(int candidateID)
+    public void removeCandidate(List<int> candidateIDList)
     {
-        List<List<int>> VotesToRedistribute = OrganizedVotes[candidateID];
-        OrganizedVotes.Remove(candidateID);
-        foreach(List<int> votes in VotesToRedistribute)
+        foreach (int candidateID in candidateIDList)
         {
-            if(votes.Count > 0)
+            List<List<int>> VotesToRedistribute = OrganizedVotes[candidateID];
+            OrganizedVotes.Remove(candidateID);
+            foreach (List<int> votes in VotesToRedistribute)
             {
-                int NextCandidate = votes[0];
-                List<int> NewAlteredList = votes;
-                NewAlteredList.RemoveAt(0);
-                OrganizedVotes[NextCandidate].Add(NewAlteredList);
+                while (true)
+                {
+                    if (votes.Count > 0)
+                    {
+                        int NextCandidate = votes[0];
+                        List<int> NewAlteredList = votes;
+                        NewAlteredList.RemoveAt(0);
+                        if (OrganizedVotes.ContainsKey(NextCandidate))
+                        {
+                            OrganizedVotes[NextCandidate].Add(NewAlteredList);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
+            Dictionary<int, int> ElctoralCollegeVotes = DistributeElectoralCollegePoints();
+            GenerateVoteDocument(ElctoralCollegeVotes);
         }
-        Dictionary<int, int> ElctoralCollegeVotes = DistributeElectoralCollegePoints();
-        GenerateVoteDocument(ElctoralCollegeVotes);
     }
 
     private void GenerateVoteDocument(Dictionary<int, int> ElectoralCollegeVotes)
     {
-        var jsonList = new List<KeyValuePair<int,int>>(); 
-        foreach(KeyValuePair<int, int> ecv in ElectoralCollegeVotes)
+        var jsonList = new List<KeyValuePair<int, int>>();
+        foreach (KeyValuePair<int, int> ecv in ElectoralCollegeVotes)
         {
             KeyValuePair<int, int> tempKVP = new KeyValuePair<int, int>(ecv.Key, ecv.Value);
             jsonList.Add(tempKVP);
@@ -98,15 +112,7 @@ public class State
         calculateCandidateElectors("ElectionCircumstances/Candidates.json", "StateVotes/" + Name + ".json");
     }
 
-    private Dictionary<int, Candidate> CandidateDictionaryGenerator(List<Candidate> candidates)
-    {
-        Dictionary<int, Candidate> FinalDictionary = new Dictionary<int, Candidate>();
-        foreach (Candidate c in candidates)
-        {
-            FinalDictionary.Add(c.ID, c);
-        }
-        return FinalDictionary;
-    }
+
 
     private Dictionary<int, List<List<int>>> OrganizeVotes(List<Candidate> candidates, List<VoterPreferences> Votes)
     {

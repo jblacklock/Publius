@@ -37,11 +37,26 @@ namespace Publius
                 s.calculateCandidateElectors();
             }
 
-            // test code
-            foreach (State s in states)
+            // Instant Runoff Election
+            Federal instantRunoffGovernment = new Federal();
+            ElectionOutcome thereIsAWinner = instantRunoffGovernment.IsThereAWinner(ElectionType.InstantRunoff);
+            while (thereIsAWinner.outcome == Outcome.Undecided)
             {
-                s.removeCandidate(3);
+                List<int> loser = instantRunoffGovernment.CandidateToRemove();
+                foreach (State s in states)
+                {
+                    s.removeCandidate(loser);
+                }
+                thereIsAWinner = instantRunoffGovernment.IsThereAWinner(ElectionType.InstantRunoff);
             }
+            Console.WriteLine("INSTANT RUNOFF ELECTION:");
+            Console.WriteLine(thereIsAWinner.GetElectionOutcome());
+
+            // First Past The Post Election
+            Federal currentGovernment = new Federal();
+            ElectionOutcome PostWinner = currentGovernment.IsThereAWinner(ElectionType.FirstPastThePost);
+            Console.WriteLine("FIRST PAST THE POST ELECTION:");
+            Console.WriteLine(PostWinner.GetElectionOutcome());
         }
     }
 }
