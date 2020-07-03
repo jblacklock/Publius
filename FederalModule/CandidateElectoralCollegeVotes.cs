@@ -18,5 +18,11 @@ public class CandidateElectoralCollegeVotes
             throw new System.InvalidOperationException("Candidates cannot recieve negative electoral college votes (no matter how unpopular they are)");
         }
         ElectotalCollegeVotes += newElectoralCollegeVotes;
+        // Console.WriteLine(candidate.Name + " has " + ElectotalCollegeVotes.ToString()+ " electoral college votes");
+    }
+
+    public void clearElectoralCollegeVotes ()
+    {
+        ElectotalCollegeVotes = 0;
     }
 }

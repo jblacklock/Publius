@@ -9,7 +9,7 @@ public class Federal
     private List<Candidate> candidates;
     private Dictionary<int, Candidate> CandidateDictionary;
     private ElectionType electionType;
-    private int Round = 0; 
+    private int Round = 0;
     private int totalElectoralCollegeVotes = 0;
     public Federal(string StatePath = "ElectionCircumstances/States.json", string CandidatePath = "ElectionCircumstances/Candidates.json")
     {
@@ -53,7 +53,11 @@ public class Federal
 
     public ElectionOutcome IsThereAWinner(ElectionType electionType, string ElectoralCollegeVotes = @"ElectoralCollegeVotes\")
     {
-        if(electionType == ElectionType.InstantRunoff)
+        foreach (KeyValuePair<int, CandidateElectoralCollegeVotes> c in IDCandidateElectoralCollegeVotes)
+        {
+            c.Value.clearElectoralCollegeVotes();
+        }
+        if (electionType == ElectionType.InstantRunoff)
         {
             Round++;
         }
@@ -64,10 +68,8 @@ public class Federal
             KeyValuePair<int, List<KeyValuePair<int, int>>> CandidateAndVotes = reader.ReadStatesResults(state.Name);
             if (CandidateAndVotes.Key <= state.Electors)
             {
-
                 foreach (KeyValuePair<int, int> candidateVote in CandidateAndVotes.Value)
                 {
-
                     IDCandidateElectoralCollegeVotes[candidateVote.Key].SetElcetoralCollegeVotes(candidateVote.Value);
                 }
             }
@@ -84,23 +86,21 @@ public class Federal
             if (c.Value.GetElcetoralCollegeVotes() > mostElectoralVotes)
             {
                 mostElectoralVotes = c.Value.GetElcetoralCollegeVotes();
-                
+
             }
         }
         if (mostElectoralVotes > totalElectoralCollegeVotes / 2 || IDCandidateElectoralCollegeVotes.Count == 1)
-        // the following if condition is test code, the above if condition is the actual code
-        // if (IDCandidateElectoralCollegeVotes.Count == 1)
         {
             int max = IDCandidateElectoralCollegeVotes.Aggregate((l, r) => l.Value.GetElcetoralCollegeVotes() > r.Value.GetElcetoralCollegeVotes() ? l : r).Key;
             ElectionOutcome WinningOutcome = new ElectionOutcome();
             WinningOutcome.ElectionType = electionType;
             WinningOutcome.Winner = IDCandidateElectoralCollegeVotes[max];
             WinningOutcome.outcome = Outcome.ClearWinner;
-            if(electionType == ElectionType.InstantRunoff)
+            if (electionType == ElectionType.InstantRunoff)
             {
-            WinningOutcome.Round = Round;
+                WinningOutcome.Round = Round;
             }
-            WinningOutcome.Results = outcomeList; 
+            WinningOutcome.Results = outcomeList;
             WinningOutcome.totalElectoralCollegeVotes = totalElectoralCollegeVotes;
             return WinningOutcome;
         }
@@ -122,11 +122,11 @@ public class Federal
             ElectionOutcome TieOutcome = new ElectionOutcome();
             TieOutcome.ElectionType = electionType;
             TieOutcome.outcome = Outcome.Tie;
-            if(electionType == ElectionType.InstantRunoff)
+            if (electionType == ElectionType.InstantRunoff)
             {
-            TieOutcome.Round = Round;
+                TieOutcome.Round = Round;
             }
-            TieOutcome.Results = outcomeList; 
+            TieOutcome.Results = outcomeList;
             TieOutcome.totalElectoralCollegeVotes = totalElectoralCollegeVotes;
             return TieOutcome;
         }
@@ -135,11 +135,11 @@ public class Federal
             ElectionOutcome NoOutcome = new ElectionOutcome();
             NoOutcome.ElectionType = electionType;
             NoOutcome.outcome = Outcome.Undecided;
-            if(electionType == ElectionType.InstantRunoff)
+            if (electionType == ElectionType.InstantRunoff)
             {
-            NoOutcome.Round = Round;
+                NoOutcome.Round = Round;
             }
-            NoOutcome.Results = outcomeList; 
+            NoOutcome.Results = outcomeList;
             NoOutcome.totalElectoralCollegeVotes = totalElectoralCollegeVotes;
             return NoOutcome;
         }
